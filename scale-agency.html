@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scale Agency — Digital Growth Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F8F7F4;
+  --bg2: #F0EEE9;
+  --black: #0D0D0D;
+  --text: #1A1A1A;
+  --muted: #8A8780;
+  --accent: #1A1A1A;
+  --blue: #2563EB;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(248,247,244,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: var(--black);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+.nav-logo sup {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--blue);
+  vertical-align: super;
+  margin-left: 2px;
+  letter-spacing: 1px;
+}
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.2px;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-cta {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.2px;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 64px 80px 48px;
+  position: relative; z-index: 2;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin-bottom: 48px;
+  width: fit-content;
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  background: #22C55E;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+.badge-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 5.5vw, 80px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: var(--black);
+  margin-bottom: 28px;
+}
+.hero-title .italic { font-style: italic; color: var(--blue); }
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.hero-actions { display: flex; align-items: center; gap: 20px; }
+.btn-primary {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-secondary {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 400;
+  cursor: pointer;
+  border: none; background: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s;
+}
+.btn-secondary:hover { color: var(--black); }
+.hero-metrics {
+  margin-top: 64px;
+  display: flex; gap: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.metric-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  color: var(--black);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.metric-val sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--blue);
+  font-weight: 500;
+  vertical-align: bottom;
+}
+.metric-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* 3D CANVAS AREA */
+.hero-right {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+#hero-canvas {
+  width: 100%; height: 100%;
+  display: block;
+}
+.canvas-label {
+  position: absolute;
+  bottom: 40px; right: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* ─── TICKER ─── */
+.ticker-bar {
+  background: var(--black);
+  overflow: hidden;
+  padding: 14px 0;
+}
+.ticker-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: ticker 25s linear infinite;
+}
+.ticker-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding: 0 32px;
+  display: flex; align-items: center; gap: 32px;
+}
+.ticker-item::after { content: '·'; color: var(--blue); }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 120px 48px; }
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 20px;
+  display: block;
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--black);
+}
+
+/* ─── SERVICES ─── */
+.services { background: white; }
+.services-top {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 64px;
+}
+.services-sub {
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.service-card {
+  background: white;
+  padding: 40px 36px;
+  position: relative;
+  transition: background 0.3s;
+  cursor: default;
+}
+.service-card:hover { background: #FAFAF9; }
+.service-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.service-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.service-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.service-list { list-style: none; }
+.service-list li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  transition: color 0.2s;
+}
+.service-card:hover .service-list li { color: rgba(26,26,26,0.7); }
+.service-list li::before {
+  content: '';
+  width: 3px; height: 3px;
+  background: var(--blue);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── 3D SERVICES ORBS ─── */
+#orbs-canvas {
+  width: 100%; height: 300px;
+  display: block;
+  margin: 48px 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+/* ─── PROCESS ─── */
+.process { background: var(--bg); }
+.process-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+.process-steps-list { display: flex; flex-direction: column; gap: 0; }
+.process-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+  transition: background 0.2s;
+}
+.process-step:first-child { border-top: 1px solid var(--border); }
+.step-num-box {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+.process-step:hover .step-num-box {
+  background: var(--black);
+  border-color: var(--black);
+  color: white;
+}
+.step-content-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+.step-content-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* 3D rotating cube in process */
+#process-canvas {
+  width: 100%; height: 100%; min-height: 400px;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* ─── WHY ─── */
+.why { background: white; }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.why-statement {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  color: var(--black);
+  margin-top: 24px;
+}
+.why-statement em { font-style: italic; color: var(--blue); }
+.diff-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+.diff-item {
+  display: flex; gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.diff-item:first-child { border-top: 1px solid var(--border); }
+.diff-icon-box {
+  width: 40px; height: 40px;
+  background: var(--bg2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.diff-title {
+  font-size: 14px; font-weight: 600;
+  color: var(--black);
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+.diff-desc { font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+/* ─── CTA ─── */
+.cta-section {
+  background: var(--black);
+  padding: 120px 48px;
+  position: relative;
+  overflow: hidden;
+}
+#cta-canvas {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+.cta-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(40px, 5vw, 72px);
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: white;
+}
+.cta-title em { font-style: italic; color: rgba(255,255,255,0.4); }
+.cta-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  max-width: 460px;
+}
+.cta-right { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.btn-cta-white {
+  background: white;
+  color: var(--black);
+  border: none;
+  padding: 16px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-cta-white:hover { opacity: 0.9; transform: translateY(-2px); }
+.cta-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: white;
+}
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ─── REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 20px 40px; }
+  .hero-right { height: 300px; }
+  section { padding: 80px 20px; }
+  .services-top { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .services-grid { grid-template-columns: 1fr; }
+  .process-inner { grid-template-columns: 1fr; }
+  #process-canvas { min-height: 260px; }
+  .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Scale<sup>®</sup></a>
+  <ul class="nav-links">
+    <li><a href="#usluge">Usluge</a></li>
+    <li><a href="#proces">Proces</a></li>
+    <li><a href="#zasto">Zašto mi</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počnimo razgovor →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Dostupni za projekte</span>
+    </div>
+    <h1 class="hero-title">
+      Vaš sajt je vaš<br>
+      <span class="italic">najjači prodavac.</span>
+    </h1>
+    <p class="hero-sub">
+      Kreiramo digitalne platforme koje ne samo da izgledaju besprekorno — one rade 24/7 i pretvaraju posetioce u lojalne klijente.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">
+        Besplatna konsultacija
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('usluge').scrollIntoView({behavior:'smooth'})">
+        Pogledaj usluge
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="hero-metrics">
+      <div>
+        <div class="metric-val">24<sub>/7</sub></div>
+        <div class="metric-label">Sajt prodaje umjesto vas</div>
+      </div>
+      <div>
+        <div class="metric-val">100<sub>%</sub></div>
+        <div class="metric-label">Custom dizajn, nula šablona</div>
+      </div>
+      <div>
+        <div class="metric-val">3<sub>×</sub></div>
+        <div class="metric-label">Brži od prosjeka</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <canvas id="hero-canvas"></canvas>
+    <div class="canvas-label">Interactive · Drag to explore</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <div class="ticker-item">Web Development</div>
+    <div class="ticker-item">Brand Identity</div>
+    <div class="ticker-item">SEO Optimizacija</div>
+    <div class="ticker-item">Lead Generation</div>
+    <div class="ticker-item">UI/UX Dizajn</div>
+    <div class="ticker-item">Marketing Strategija</div>
+    <div class="ticker-item">Psihologija Prodaje</div>
+    <div class="ticker-item">Web Development</div>
+    <div class="ticker-item">Brand Identity</div>
+    <div class="ticker-item">SEO Optimizacija</div>
+    <div class="ticker-item">Lead Generation</div>
+    <div class="ticker-item">UI/UX Dizajn</div>
+    <div class="ticker-item">Marketing Strategija</div>
+    <div class="ticker-item">Psihologija Prodaje</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="usluge">
+  <div class="services-top reveal">
+    <div>
+      <span class="section-tag">Naše usluge</span>
+      <h2 class="section-title">Sveobuhvatno rješenje<br>za vaš biznis.</h2>
+    </div>
+    <p class="services-sub">Tri stuba koja vašu ideju pretvaraju u sistem za rast. Ništa generičko — sve po mjeri.</p>
+  </div>
+  <div class="services-grid reveal reveal-delay-1">
+    <div class="service-card">
+      <div class="service-tag">01 — Web Dev</div>
+      <div class="service-title">Premium Web Development</div>
+      <p class="service-desc">Nije šablon. Nije template. Čist kod, maksimalna brzina, Google-ready od prvog dana.</p>
+      <ul class="service-list">
+        <li>Custom dizajn — bez generičkih šablona</li>
+        <li>Mobile-First — perfektno na svakom uređaju</li>
+        <li>Brzina &amp; optimizacija — učitava se za delić sekunde</li>
+        <li>SEO osnova — klijenti vas lako pronalaze</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-tag">02 — Branding</div>
+      <div class="service-title">Branding &amp; Vizuelni Identitet</div>
+      <p class="service-desc">Vaš brend mora da priča priču. Vizuelni jezik koji uliva povjerenje i pamtljivost.</p>
+      <ul class="service-list">
+        <li>Logo design — simbol karaktera vašeg biznisa</li>
+        <li>Tipografija &amp; paleta boja — prepoznatljiv stil</li>
+        <li>Brand Manual — pravila za sve kanale</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-tag">03 — Marketing</div>
+      <div class="service-title">Marketing &amp; Strategija Rasta</div>
+      <p class="service-desc">Promet bez konverzije je šetnja. Postavljamo sisteme koji upite pretvaraju u prihod.</p>
+      <ul class="service-list">
+        <li>Content strategija — poruke koje pogađaju</li>
+        <li>Lead Generation — sistem za prikupljanje upita</li>
+        <li>Analitika — stalno praćenje i unapređenje</li>
+      </ul>
+    </div>
+  </div>
+  <canvas id="orbs-canvas"></canvas>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="proces">
+  <div class="process-inner">
+    <div>
+      <span class="section-tag reveal">Kako radimo</span>
+      <h2 class="section-title reveal reveal-delay-1">Put do<br>uspjeha.</h2>
+      <p class="reveal reveal-delay-2" style="font-size:14px;line-height:1.7;color:var(--muted);margin-top:20px;">
+        Pet preciznih koraka. Nema iznenađenja, nema zakašnjenja. Samo jasni rezultati.
+      </p>
+    </div>
+    <div>
+      <div class="process-steps-list">
+        <div class="process-step reveal">
+          <div class="step-num-box">01</div>
+          <div>
+            <div class="step-content-title">Strategija &amp; Istraživanje</div>
+            <div class="step-content-desc">Analiza konkurencije i ciljne grupe. Znamo gdje ste i kuda idete prije nego napišemo prvi red koda.</div>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num-box">02</div>
+          <div>
+            <div class="step-content-title">UX/UI Dizajn</div>
+            <div class="step-content-desc">Vizuelni prototip koji vi odobravate. Vi imate kontrolu, mi imamo viziju.</div>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num-box">03</div>
+          <div>
+            <div class="step-content-title">Development</div>
+            <div class="step-content-desc">Kodiranje uz primjenu najnovijih tehnologija. Brzo, sigurno, skalabilno.</div>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num-box">04</div>
+          <div>
+            <div class="step-content-title">Testiranje &amp; Lansiranje</div>
+            <div class="step-content-desc">Detaljna provjera svih funkcija. Nula grešaka prije puštanja u rad.</div>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-4">
+          <div class="step-num-box">05</div>
+          <div>
+            <div class="step-content-title">Podrška</div>
+            <div class="step-content-desc">Tu smo i nakon završetka. Rast ne staje — ni mi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="zasto">
+  <div class="why-grid">
+    <div>
+      <span class="section-tag reveal">Zašto Scale</span>
+      <h2 class="why-statement reveal reveal-delay-1">
+        Ne pravimo samo lijepe sajtove.<br>
+        <em>Pravimo alate za rast biznisa.</em>
+      </h2>
+      <p class="reveal reveal-delay-2" style="margin-top:24px;font-size:15px;line-height:1.7;color:var(--muted);">
+        Spajamo vrhunski inženjering sa psihologijom prodaje i modernim dizajnom. Vaš sajt postaje vaš best prodavac.
+      </p>
+    </div>
+    <div class="diff-list">
+      <div class="diff-item reveal">
+        <div class="diff-icon-box">⚙️</div>
+        <div>
+          <div class="diff-title">Inženjering na prvom mestu</div>
+          <p class="diff-desc">Svaki sajt je optimizovan za brzinu, sigurnost i skalabilnost. Lepota je površina — ispod je čvrstina.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-1">
+        <div class="diff-icon-box">🧠</div>
+        <div>
+          <div class="diff-title">Psihologija prodaje u dizajnu</div>
+          <p class="diff-desc">Svaki element, svaka boja, svaki CTA postavljen je s namjerom. Vodimo posetioce ka konverziji bez da to osjete.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-2">
+        <div class="diff-icon-box">📊</div>
+        <div>
+          <div class="diff-title">Merljivi rezultati</div>
+          <p class="diff-desc">Vjerujemo u brojeve. Analitika, praćenje, unapređenje — svaki mesec bolje od prethodnog.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-3">
+        <div class="diff-icon-box">🤝</div>
+        <div>
+          <div class="diff-title">Partner, ne izvođač</div>
+          <p class="diff-desc">Vaš uspjeh je naš uspjeh. Tu smo za vas prije, tokom i posle projekta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontakt">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-title">
+        Sledeći korak<br>
+        <em>je vaš.</em>
+      </h2>
+      <p class="cta-desc">Recite nam vašu viziju. Mi ćemo predložiti konkretna rješenja prilagođena vašim potrebama — bez obaveza.</p>
+    </div>
+    <div class="cta-right">
+      <button class="btn-cta-white">
+        Zakažite razgovor
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="cta-note">Besplatna konsultacija · 30 min</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Scale Agency</div>
+  <p class="footer-copy">© 2024 Scale Agency · Vaš partner za digitalni rast</p>
+  <p class="footer-copy">Ne pravimo lijepe sajtove. Pravimo rezultate.</p>
+</footer>
+
+<script>
+/* ─── HERO 3D SCENE ─── */
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0xF8F7F4, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0, 6);
+
+  // Lights
+  const amb = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(amb);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+  dir.position.set(5, 5, 5);
+  scene.add(dir);
+  const blue = new THREE.PointLight(0x2563EB, 2, 10);
+  blue.position.set(-3, 2, 2);
+  scene.add(blue);
+  const warm = new THREE.PointLight(0xFBBF24, 1.5, 8);
+  warm.position.set(3, -2, 1);
+  scene.add(warm);
+
+  // Main torus knot
+  const knotGeo = new THREE.TorusKnotGeometry(1.2, 0.35, 128, 32, 2, 3);
+  const knotMat = new THREE.MeshPhysicalMaterial({
+    color: 0x1A1A1A,
+    metalness: 0.6,
+    roughness: 0.2,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1,
+  });
+  const knot = new THREE.Mesh(knotGeo, knotMat);
+  scene.add(knot);
+
+  // Floating particles
+  const partGeo = new THREE.BufferGeometry();
+  const partCount = 80;
+  const positions = new Float32Array(partCount * 3);
+  for (let i = 0; i < partCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 8;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+  }
+  partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const partMat = new THREE.PointsMaterial({ color: 0x2563EB, size: 0.04, transparent: true, opacity: 0.6 });
+  const particles = new THREE.Points(partGeo, partMat);
+  scene.add(particles);
+
+  // Wireframe sphere
+  const sphereGeo = new THREE.SphereGeometry(2.2, 16, 16);
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0x2563EB, wireframe: true, transparent: true, opacity: 0.06 });
+  const sphere = new THREE.Mesh(sphereGeo, wireMat);
+  scene.add(sphere);
+
+  // Mouse interaction
+  let targetX = 0, targetY = 0, mouseX = 0, mouseY = 0;
+  let isDragging = false, lastX = 0, lastY = 0;
+  let rotX = 0, rotY = 0;
+
+  canvas.addEventListener('mousedown', e => { isDragging = true; lastX = e.clientX; lastY = e.clientY; });
+  window.addEventListener('mouseup', () => { isDragging = false; });
+  canvas.addEventListener('mousemove', e => {
+    if (isDragging) {
+      rotY += (e.clientX - lastX) * 0.01;
+      rotX += (e.clientY - lastY) * 0.01;
+      lastX = e.clientX; lastY = e.clientY;
+    } else {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      mouseY = -((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    }
+  });
+
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    if (isDragging) {
+      rotY += (t.clientX - lastX) * 0.01;
+      rotX += (t.clientY - lastY) * 0.01;
+      lastX = t.clientX; lastY = t.clientY;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchstart', e => { isDragging = true; lastX = e.touches[0].clientX; lastY = e.touches[0].clientY; });
+  canvas.addEventListener('touchend', () => isDragging = false);
+
+  function resize() {
+    const w = canvas.parentElement.offsetWidth;
+    const h = canvas.parentElement.offsetHeight || window.innerHeight - 64;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    targetX += (mouseX * 0.3 - targetX) * 0.05;
+    targetY += (mouseY * 0.3 - targetY) * 0.05;
+
+    knot.rotation.x = rotX + targetY + t * 0.15;
+    knot.rotation.y = rotY + targetX + t * 0.2;
+    sphere.rotation.y = t * 0.05;
+    particles.rotation.y = t * 0.03;
+    particles.rotation.x = t * 0.02;
+
+    blue.position.x = Math.sin(t * 0.7) * 3;
+    blue.position.y = Math.cos(t * 0.5) * 2;
+    warm.position.x = Math.cos(t * 0.4) * 3;
+    warm.position.y = Math.sin(t * 0.6) * 2;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* ─── ORBS 3D SCENE (services) ─── */
+(function() {
+  const canvas = document.getElementById('orbs-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0xF0EEE9, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.set(0, 0, 8);
+
+  const amb = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(amb);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+  dir.position.set(3, 5, 5);
+  scene.add(dir);
+
+  const colors = [0x2563EB, 0x1A1A1A, 0x7C3AED];
+  const labels = ['Web Dev', 'Branding', 'Marketing'];
+  const orbGroup = new THREE.Group();
+
+  colors.forEach((color, i) => {
+    const angle = (i / 3) * Math.PI * 2 - Math.PI / 2;
+    const x = Math.cos(angle) * 2.5;
+    const y = Math.sin(angle) * 1.2;
+    const geo = new THREE.SphereGeometry(0.7, 32, 32);
+    const mat = new THREE.MeshPhysicalMaterial({
+      color, metalness: 0.3, roughness: 0.15,
+      clearcoat: 1, clearcoatRoughness: 0.05, transparent: true, opacity: 0.9
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x, y, 0);
+    orbGroup.add(mesh);
+
+    // Ring around each orb
+    const ringGeo = new THREE.TorusGeometry(0.9, 0.02, 8, 64);
+    const ringMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.3 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.position.set(x, y, 0);
+    ring.rotation.x = Math.PI / 4;
+    orbGroup.add(ring);
+  });
+
+  scene.add(orbGroup);
+
+  // Connector lines
+  const linePoints = [];
+  for (let i = 0; i < 3; i++) {
+    const a1 = (i / 3) * Math.PI * 2 - Math.PI / 2;
+    const a2 = ((i + 1) / 3) * Math.PI * 2 - Math.PI / 2;
+    linePoints.push(new THREE.Vector3(Math.cos(a1) * 2.5, Math.sin(a1) * 1.2, 0));
+    linePoints.push(new THREE.Vector3(Math.cos(a2) * 2.5, Math.sin(a2) * 1.2, 0));
+  }
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x2563EB, transparent: true, opacity: 0.15 });
+  scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+  function resize() {
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const clock = new THREE.Clock();
+  let mx = 0, my = 0;
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    my = -((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    orbGroup.rotation.z = t * 0.1;
+    orbGroup.rotation.x = my * 0.15;
+    orbGroup.rotation.y = mx * 0.15;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* ─── CTA 3D PARTICLES ─── */
+(function() {
+  const canvas = document.getElementById('cta-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x0D0D0D, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.set(0, 0, 5);
+
+  const geo = new THREE.BufferGeometry();
+  const count = 200;
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 20;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 5;
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ color: 0x2563EB, size: 0.06, transparent: true, opacity: 0.5 });
+  scene.add(new THREE.Points(geo, mat));
+
+  function resize() {
+    const section = canvas.parentElement;
+    renderer.setSize(section.offsetWidth, section.offsetHeight);
+    camera.aspect = section.offsetWidth / section.offsetHeight;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    scene.rotation.y = t * 0.04;
+    scene.rotation.x = Math.sin(t * 0.2) * 0.1;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* ─── SCROLL REVEAL ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
